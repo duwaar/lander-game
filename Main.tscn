@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://ControlPanel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://LanderState.gd" type="Script" id=3]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ControlPanel" parent="." instance=ExtResource( 2 )]
+
+[node name="LanderState" type="Node" parent="."]
+script = ExtResource( 3 )
+[connection signal="display_altitude" from="ControlPanel" to="." method="_on_ControlPanel_display_altitude"]
+[connection signal="display_fuel" from="ControlPanel" to="." method="_on_ControlPanel_display_fuel"]
+[connection signal="display_velocity" from="ControlPanel" to="." method="_on_ControlPanel_display_velocity"]
+[connection signal="engine_off" from="ControlPanel" to="." method="_on_ControlPanel_engine_off"]
+[connection signal="engine_on" from="ControlPanel" to="." method="_on_ControlPanel_engine_on"]
+[connection signal="crashed" from="LanderState" to="." method="_on_LanderState_crashed"]
+[connection signal="landed" from="LanderState" to="." method="_on_LanderState_landed"]
