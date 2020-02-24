@@ -5,7 +5,7 @@ signal crashed
 signal landed
 
 # Physics quantities
-var altitude = 1000
+var altitude = 2000
 var velocity = 0
 const gravity = -5
 var ship_mass = 1000

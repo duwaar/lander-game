@@ -15,15 +15,14 @@
 script = ExtResource( 1 )
 
 [node name="Terminal" type="Node2D" parent="."]
-editor/display_folded = true
 position = Vector2( 15, 315 )
 script = ExtResource( 2 )
 
 [node name="TerminalTextbox" type="RichTextLabel" parent="Terminal"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 560.0
-margin_bottom = 260.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 550.0
+margin_bottom = 250.0
 rect_clip_content = false
 text = "foobar, goo
 nothing much
@@ -102,9 +101,9 @@ max_text = "E"
 [node name="Spedometer" parent="." instance=ExtResource( 10 )]
 position = Vector2( 300, 280 )
 title_text = "Velocity"
-min_text = "-500 m/s"
+min_text = "50 m/s"
 mid_text = "0 m/s"
-max_text = "500 m/s"
+max_text = "-50 m/s"
 
 [node name="EngineButton" type="Button" parent="."]
 margin_left = 435.0

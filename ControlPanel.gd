@@ -8,7 +8,16 @@ signal engine_off
 
 func _ready():
 	$Terminal.print_line("LanderOS v27.4.0 read-only mode:")
-	
+
+
+func log_base(b, x):
+	return log(x) / log(b)
+
+func landed():
+	display_landed()
+
+func crashed():
+	display_crashed()
 
 func gauge_altitude(altitude):
 	var max_abs_altitude = 10000
@@ -16,15 +25,10 @@ func gauge_altitude(altitude):
 	$Altimeter.set_gauge(log_altitude / log(max_abs_altitude))
 
 func gauge_velocity(velocity):
-	var max_abs_velocity = 500
-	var log_velocity
-	if velocity > 0:
-		log_velocity = log(clamp(velocity, 0, 500) + 1.000001)
-	elif velocity < 0:
-		log_velocity = -log(clamp(abs(velocity), 0, 500) + 1)
-	else:
-		log_velocity = 0.0000001
-	$Spedometer.set_gauge(log_velocity / log(max_abs_velocity) + 0.5)
+	var max_speed = 50
+	var clamped_velocity = clamp(velocity, -max_speed, max_speed)
+	var gauge_velocity = clamped_velocity / max_speed / 2 + 0.5
+	$Spedometer.set_gauge(gauge_velocity)
 
 func gauge_fuel(fuel):
 	$Fuel.set_gauge(fuel / 100)
@@ -53,17 +57,17 @@ func display_engine_state(engine_on):
 	$Terminal.print_line("Engine: " + state)
 
 func display_all(altitude, velocity, fuel, engine_on):
-	$Terminal.print_line("LANDER STATUS")
+	$Terminal.print_line("*** LANDER STATUS ***")
 	display_altitude(altitude)
 	display_velocity(velocity)
 	display_fuel(fuel)
 	display_engine_state(engine_on)
-	$Terminal.print_line("")
 
-func display_landed_message():
+func display_landed():
+	$Terminal.print_line("*** LANDED ***")
 	$Terminal.print_line("Landed safely. Good work, captain.")
 	$Terminal.print_line("Engine shut down.")
-	$Terminal.print_line("LanderOS shutting down...")
+	$Terminal.print_line("")
 
 func display_crashed():
 	$Terminal.print_line("Crashed. You fucked up.")
