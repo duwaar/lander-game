@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Menu.gd" type="Script" id=1]
+[ext_resource path="res://moon_bg.png" type="Texture" id=2]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="MenuBG" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 225.0
+margin_top = 400.0
+margin_right = 375.0
+margin_bottom = 450.0
+text = "Start Game"
+
+[node name="HelpButton" type="Button" parent="."]
+margin_left = 225.0
+margin_top = 460.0
+margin_right = 375.0
+margin_bottom = 510.0
+text = "Help"
+
+[node name="AboutButton" type="Button" parent="."]
+margin_left = 225.0
+margin_top = 520.0
+margin_right = 375.0
+margin_bottom = 570.0
+text = "About"
+
+[node name="TitleLabel" type="Label" parent="."]
+margin_left = 225.0
+margin_top = 120.0
+margin_right = 375.0
+margin_bottom = 170.0
+text = "Lander"
+align = 1
+valign = 1
+[connection signal="button_up" from="StartButton" to="." method="_on_StartButton_button_up"]
+[connection signal="button_up" from="HelpButton" to="." method="_on_HelpButton_button_up"]
+[connection signal="button_up" from="AboutButton" to="." method="_on_AboutButton_button_up"]

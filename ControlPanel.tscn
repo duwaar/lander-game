@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ControlPanel.gd" type="Script" id=1]
 [ext_resource path="res://Terminal.gd" type="Script" id=2]
 [ext_resource path="res://terminal_bg.png" type="Texture" id=3]
 [ext_resource path="res://panel_bg.png" type="Texture" id=4]
-[ext_resource path="res://crashed_bg.png" type="Texture" id=5]
-[ext_resource path="res://EngineLight.gd" type="Script" id=6]
-[ext_resource path="res://engine_off_light.png" type="Texture" id=7]
-[ext_resource path="res://engine_on_light.png" type="Texture" id=8]
-[ext_resource path="res://engine_light_ring.png" type="Texture" id=9]
-[ext_resource path="res://Gauge.tscn" type="PackedScene" id=10]
+[ext_resource path="res://EngineLight.gd" type="Script" id=5]
+[ext_resource path="res://engine_off_light.png" type="Texture" id=6]
+[ext_resource path="res://engine_on_light.png" type="Texture" id=7]
+[ext_resource path="res://engine_light_ring.png" type="Texture" id=8]
+[ext_resource path="res://Gauge.tscn" type="PackedScene" id=9]
 
 [node name="ControlPanel" type="Node2D"]
 script = ExtResource( 1 )
@@ -40,43 +39,25 @@ z_index = -2
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Crashed" type="Node2D" parent="."]
-editor/display_folded = true
-z_index = -3
-
-[node name="CrashedBG" type="Sprite" parent="Crashed"]
-texture = ExtResource( 5 )
-centered = false
-
-[node name="CrashedMessage" type="Label" parent="Crashed"]
-margin_left = 250.0
-margin_top = 320.0
-margin_right = 370.0
-margin_bottom = 340.0
-rect_rotation = -40.0
-text = "Lander crashed."
-align = 1
-valign = 1
-
 [node name="EngineLight" type="Node2D" parent="."]
 editor/display_folded = true
 position = Vector2( 65, 45 )
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="LightSprites" type="Node2D" parent="EngineLight"]
 editor/display_folded = true
 position = Vector2( 10, 20 )
 
 [node name="EngineLightOff" type="Sprite" parent="EngineLight/LightSprites"]
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 centered = false
 
 [node name="EngineLightOn" type="Sprite" parent="EngineLight/LightSprites"]
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 
 [node name="EngineLightRing" type="Sprite" parent="EngineLight/LightSprites"]
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 centered = false
 
 [node name="LightLabel" type="Label" parent="EngineLight"]
@@ -84,21 +65,21 @@ margin_right = 40.0
 margin_bottom = 14.0
 text = "Engines On"
 
-[node name="Altimeter" parent="." instance=ExtResource( 10 )]
+[node name="Altimeter" parent="." instance=ExtResource( 9 )]
 position = Vector2( 100, 280 )
 title_text = "Altitude"
 min_text = "10 km"
 mid_text = "300 km"
 max_text = "0 km"
 
-[node name="Fuel" parent="." instance=ExtResource( 10 )]
+[node name="Fuel" parent="." instance=ExtResource( 9 )]
 position = Vector2( 300, 130 )
 title_text = "Fuel Level"
 min_text = "F"
 mid_text = "1/2"
 max_text = "E"
 
-[node name="Spedometer" parent="." instance=ExtResource( 10 )]
+[node name="Spedometer" parent="." instance=ExtResource( 9 )]
 position = Vector2( 300, 280 )
 title_text = "Velocity"
 min_text = "50 m/s"

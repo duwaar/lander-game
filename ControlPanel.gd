@@ -7,8 +7,11 @@ signal engine_on
 signal engine_off
 
 func _ready():
-	$Terminal.print_line("LanderOS v27.4.0 read-only mode:")
+	reset()
 
+func reset():
+	$Terminal.clear()
+	$Terminal.print_line("LanderOS v27.4.0 read-only mode:")
 
 func log_base(b, x):
 	return log(x) / log(b)

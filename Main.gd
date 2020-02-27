@@ -3,6 +3,12 @@ extends Node2D
 var cmd_time_accumulator = 0
 var flying = true
 
+func _ready():
+	$Menu.visible = true
+	$ControlPanel.visible = false
+	$Help.visible = false
+	$About.visible = false
+
 func _process(delta):
 	$ControlPanel.gauge_altitude($LanderState.altitude)
 	$ControlPanel.gauge_velocity($LanderState.velocity)
@@ -42,9 +48,42 @@ func _on_ControlPanel_engine_on():
 func _on_LanderState_crashed():
 	flying = false
 	$LanderState.engine_on = false
-	$ControlPanel.display_crashed()
+	$ControlPanel.visible = false
+	$Crashed.visible = true
 
 func _on_LanderState_landed():
 	flying = false
 	$LanderState.engine_on = false
-	$ControlPanel.display_landed()
+	$ControlPanel.visible = false
+	$Landed.visible = true
+
+func _on_Menu_about():
+	$Menu.visible = false
+	$About.visible = true
+
+func _on_Menu_help():
+	$Menu.visible = false
+	$Help.visible = true
+
+func _on_Menu_start():
+	flying = true
+	$Menu.visible = false
+	$ControlPanel.visible = true
+	$ControlPanel.reset()
+	$LanderState.reset()
+
+func _on_Help_main_menu():
+	$Help.visible = false
+	$Menu.visible = true
+
+func _on_About_main_menu():
+	$About.visible = false
+	$Menu.visible = true
+
+func _on_Crashed_main_menu():
+	$Crashed.visible = false
+	$Menu.visible = true
+
+func _on_Landed_main_menu():
+	$Landed.visible = false
+	$Menu.visible = true
