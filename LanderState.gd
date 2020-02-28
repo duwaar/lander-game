@@ -25,7 +25,7 @@ func _process(delta):
 		update_fuel(delta)
 
 func reset():
-	altitude = 1000
+	altitude = 3000
 	velocity = 0
 	flying = true
 

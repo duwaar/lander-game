@@ -13,9 +13,6 @@ func reset():
 	$Terminal.clear()
 	$Terminal.print_line("LanderOS v27.4.0 read-only mode:")
 
-func log_base(b, x):
-	return log(x) / log(b)
-
 func landed():
 	display_landed()
 
@@ -23,9 +20,8 @@ func crashed():
 	display_crashed()
 
 func gauge_altitude(altitude):
-	var max_abs_altitude = 10000
-	var log_altitude = log(clamp(altitude, 0, max_abs_altitude) + 1)
-	$Altimeter.set_gauge(log_altitude / log(max_abs_altitude))
+	var max_abs_altitude = 4000
+	$Altimeter.set_gauge(clamp(altitude, 0, max_abs_altitude) / max_abs_altitude)
 
 func gauge_velocity(velocity):
 	var max_speed = 50

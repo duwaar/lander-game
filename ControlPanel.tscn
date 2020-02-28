@@ -1,19 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ControlPanel.gd" type="Script" id=1]
 [ext_resource path="res://Terminal.gd" type="Script" id=2]
-[ext_resource path="res://terminal_bg.png" type="Texture" id=3]
-[ext_resource path="res://panel_bg.png" type="Texture" id=4]
-[ext_resource path="res://EngineLight.gd" type="Script" id=5]
-[ext_resource path="res://engine_off_light.png" type="Texture" id=6]
-[ext_resource path="res://engine_on_light.png" type="Texture" id=7]
-[ext_resource path="res://engine_light_ring.png" type="Texture" id=8]
-[ext_resource path="res://Gauge.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Cascadia.tres" type="DynamicFont" id=3]
+[ext_resource path="res://terminal_bg.png" type="Texture" id=4]
+[ext_resource path="res://panel_bg.png" type="Texture" id=5]
+[ext_resource path="res://EngineLight.gd" type="Script" id=6]
+[ext_resource path="res://engine_off_light.png" type="Texture" id=7]
+[ext_resource path="res://engine_on_light.png" type="Texture" id=8]
+[ext_resource path="res://engine_light_ring.png" type="Texture" id=9]
+[ext_resource path="res://Gauge.tscn" type="PackedScene" id=10]
+[ext_resource path="res://post_it_note.png" type="Texture" id=11]
+[ext_resource path="res://ArchitectsDaughter.tres" type="DynamicFont" id=12]
 
 [node name="ControlPanel" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Terminal" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 15, 315 )
 script = ExtResource( 2 )
 
@@ -23,6 +27,8 @@ margin_top = 20.0
 margin_right = 550.0
 margin_bottom = 250.0
 rect_clip_content = false
+custom_fonts/mono_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 3 )
 text = "foobar, goo
 nothing much
 lorem ipsum"
@@ -31,55 +37,57 @@ scroll_following = true
 [node name="TerminalBG" type="Sprite" parent="Terminal"]
 scale = Vector2( 1, 0.9 )
 z_index = -1
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 centered = false
 
 [node name="PanelBG" type="Sprite" parent="."]
 z_index = -2
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
 
 [node name="EngineLight" type="Node2D" parent="."]
 editor/display_folded = true
 position = Vector2( 65, 45 )
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="LightSprites" type="Node2D" parent="EngineLight"]
 editor/display_folded = true
 position = Vector2( 10, 20 )
 
 [node name="EngineLightOff" type="Sprite" parent="EngineLight/LightSprites"]
-texture = ExtResource( 6 )
-centered = false
-
-[node name="EngineLightOn" type="Sprite" parent="EngineLight/LightSprites"]
 texture = ExtResource( 7 )
 centered = false
 
-[node name="EngineLightRing" type="Sprite" parent="EngineLight/LightSprites"]
+[node name="EngineLightOn" type="Sprite" parent="EngineLight/LightSprites"]
 texture = ExtResource( 8 )
 centered = false
 
+[node name="EngineLightRing" type="Sprite" parent="EngineLight/LightSprites"]
+texture = ExtResource( 9 )
+centered = false
+
 [node name="LightLabel" type="Label" parent="EngineLight"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = -10.0
+margin_right = 80.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
 text = "Engines On"
 
-[node name="Altimeter" parent="." instance=ExtResource( 9 )]
+[node name="Altimeter" parent="." instance=ExtResource( 10 )]
 position = Vector2( 100, 280 )
 title_text = "Altitude"
-min_text = "10 km"
-mid_text = "300 km"
+min_text = "5 km"
+mid_text = "2.5 km"
 max_text = "0 km"
 
-[node name="Fuel" parent="." instance=ExtResource( 9 )]
+[node name="Fuel" parent="." instance=ExtResource( 10 )]
 position = Vector2( 300, 130 )
 title_text = "Fuel Level"
 min_text = "F"
 mid_text = "1/2"
 max_text = "E"
 
-[node name="Spedometer" parent="." instance=ExtResource( 9 )]
+[node name="Spedometer" parent="." instance=ExtResource( 10 )]
 position = Vector2( 300, 280 )
 title_text = "Velocity"
 min_text = "50 m/s"
@@ -91,6 +99,7 @@ margin_left = 435.0
 margin_top = 15.0
 margin_right = 585.0
 margin_bottom = 55.0
+custom_fonts/font = ExtResource( 3 )
 text = "Engine On"
 
 [node name="FuelButton" type="Button" parent="."]
@@ -98,6 +107,7 @@ margin_left = 435.0
 margin_top = 75.0
 margin_right = 585.0
 margin_bottom = 115.0
+custom_fonts/font = ExtResource( 3 )
 text = "Fuel Report"
 
 [node name="AltitudeButton" type="Button" parent="."]
@@ -105,6 +115,7 @@ margin_left = 435.0
 margin_top = 135.0
 margin_right = 585.0
 margin_bottom = 175.0
+custom_fonts/font = ExtResource( 3 )
 text = "Altitude Report"
 
 [node name="VelocityButton" type="Button" parent="."]
@@ -112,6 +123,7 @@ margin_left = 435.0
 margin_top = 195.0
 margin_right = 585.0
 margin_bottom = 235.0
+custom_fonts/font = ExtResource( 3 )
 text = "Velocity Report"
 
 [node name="TestButton" type="Button" parent="."]
@@ -119,7 +131,33 @@ margin_left = 435.0
 margin_top = 255.0
 margin_right = 585.0
 margin_bottom = 295.0
+custom_fonts/font = ExtResource( 3 )
 text = "OS Test"
+
+[node name="PostItNote" type="Node2D" parent="."]
+position = Vector2( 445.426, 323.88 )
+rotation = 0.261799
+
+[node name="PostItBG" type="Sprite" parent="PostItNote"]
+texture = ExtResource( 11 )
+centered = false
+
+[node name="PostItText" type="Label" parent="PostItNote"]
+margin_left = 12.0
+margin_top = 10.0
+margin_right = 191.0
+margin_bottom = 159.0
+rect_rotation = 5.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -5
+text = "Notes to captain::
+-> safe landing
+velocity is -10 m/s
+or less
+-> pulse the engines
+to slow down"
 [connection signal="button_down" from="EngineButton" to="." method="_on_EngineButton_button_down"]
 [connection signal="button_up" from="EngineButton" to="." method="_on_EngineButton_button_up"]
 [connection signal="toggled" from="EngineButton" to="." method="_on_EngineButton_toggled"]

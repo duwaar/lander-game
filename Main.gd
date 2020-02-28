@@ -6,7 +6,6 @@ var flying = true
 func _ready():
 	$Menu.visible = true
 	$ControlPanel.visible = false
-	$Help.visible = false
 	$About.visible = false
 
 func _process(delta):
@@ -17,7 +16,7 @@ func _process(delta):
 	
 	if flying:
 		cmd_time_accumulator += delta
-		if cmd_time_accumulator >= 2:
+		if cmd_time_accumulator >= 5:
 			$ControlPanel.display_all(
 					$LanderState.altitude,
 					$LanderState.velocity,
@@ -60,10 +59,6 @@ func _on_LanderState_landed():
 func _on_Menu_about():
 	$Menu.visible = false
 	$About.visible = true
-
-func _on_Menu_help():
-	$Menu.visible = false
-	$Help.visible = true
 
 func _on_Menu_start():
 	flying = true

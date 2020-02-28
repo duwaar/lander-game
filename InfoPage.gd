@@ -5,7 +5,7 @@ signal main_menu
 
 export(Texture) var background = null setget set_bg
 export(String) var title = "title" setget set_title
-export(String) var body = "body" setget set_body
+export(String, MULTILINE) var body = "body" setget set_body
 
 func _ready():
 	$Background.texture = background
