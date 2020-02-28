@@ -1,7 +1,7 @@
 To play the game,
 
---on Linux: download and run the file called "lander.x86"
+--on Linux: download the files called "lander.x86" and "lander.pck", and run the file called "lander.x86"
 
---on Windows: download and run the file called "lander.exe"
+--on Windows: download the files called "lander.exe" and "lander.pck", and run the file called "lander.exe"
 
 Have fun!
