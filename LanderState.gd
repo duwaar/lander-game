@@ -12,7 +12,7 @@ const ship_mass = 1000.0
 const engine_force = 20000.0
 
 # Vehicle status
-var fuel = 100.0
+var fuel = 0.0
 var engine_on = false
 const max_landing_speed = 10.0
 var flying = false
@@ -25,8 +25,9 @@ func _process(delta):
 		update_fuel(delta)
 
 func reset():
-	altitude = 3000
-	velocity = 0
+	altitude = 3000.0
+	velocity = 0.0
+	fuel = 100.0
 	flying = true
 
 func update_position(delta):
@@ -40,15 +41,17 @@ func update_velocity(delta):
 	velocity += get_acceleration()*delta
 
 func update_fuel(delta):
-	if engine_on:
+	if engine_on and fuel > 0.0:
 		fuel -= delta
+	if fuel < 0.0:
+		fuel = 0.0
 
 func get_acceleration():
 	var thrust
-	if engine_on:
+	if engine_on and fuel > 0.0:
 		thrust = engine_force / ship_mass
 	else:
-		thrust = 0
+		thrust = 0.0
 	return gravity + thrust
 
 func check_flying():
